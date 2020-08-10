@@ -14,12 +14,11 @@ func main() {
 	app.Name = "Simple website lookup tool"
 	app.Usage = "IP, CNAME, NameServers, MX records"
 
-	argsWithoutProg := os.Args[2]
-
+	hostname := string(os.Args[2])
 	appFlags := []cli.Flag{
 		&cli.StringFlag{
 			Name:  "host",
-			Value: string(argsWithoutProg),
+			Value: hostname,
 		},
 	}
 
