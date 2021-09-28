@@ -28,38 +28,39 @@ func main() {
 			Flags: appFlags,
 			Action: func(c *cli.Context) error {
 				ns, err := net.LookupNS(c.String("host"))
-				fmt.Println("ns :")
+				fmt.Println("NS:")
 				if err != nil {
-					fmt.Println(err)
+					fmt.Println("  " + string(err.Error()))
 				} else {
 					for i := 0; i < len(ns); i++ {
-						fmt.Println(ns[i].Host)
+						fmt.Println("  " + ns[i].Host)
 					}
 				}
 				ip, err := net.LookupIP(c.String("host"))
-				fmt.Println("ip :")
+				fmt.Println("\nIP:")
 				if err != nil {
-					fmt.Println(err)
+					fmt.Println("  " + string(err.Error()))
 				} else {
 					for i := 0; i < len(ip); i++ {
+						fmt.Print("  ")
 						fmt.Println(ip[i])
 					}
 				}
-				cname, err := net.LookupCNAME(c.String("host"))
-				fmt.Println("cname :")
-				if err != nil {
-					fmt.Println(err)
-				} else {
-					fmt.Println(cname)
-				}
 				mx, err := net.LookupMX(c.String("host"))
-				fmt.Println("mx :")
+				fmt.Println("\nMX:")
 				if err != nil {
-					fmt.Println(err)
+					fmt.Println("  " + string(err.Error()))
 				} else {
 					for i := 0; i < len(mx); i++ {
-						fmt.Println(mx[i].Host, mx[i].Pref)
+						fmt.Println("  " + mx[i].Host)
 					}
+				}
+				cname, err := net.LookupCNAME(c.String("host"))
+				fmt.Println("\nCNAME:")
+				if err != nil {
+					fmt.Println("  " + string(err.Error()))
+				} else {
+					fmt.Println("  " + cname)
 				}
 				return nil
 			},
