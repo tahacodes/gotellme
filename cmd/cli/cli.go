@@ -5,7 +5,8 @@ import (
 	"log"
 	"net"
 	"os"
-	"github.com/urfave/cli"
+
+	"github.com/urfave/cli/v2"
 )
 
 func main() {
@@ -24,43 +25,43 @@ func main() {
 		{
 			Name:  "all",
 			Usage: "Looks up the Name Servers, IP addresses, CNAME and mx for a particular host",
-			Flags : appFlags,
-			Action : func(c *cli.Context) error {
-				 ns, err := net.LookupNS(c.String("host"))
-                                 fmt.Println("ns :")
-				 if err != nil {
-					 fmt.Println(err)
-                                 } else {
-                                     for i :=0; i < len(ns); i++ {
-                                         fmt.Println(ns[i].Host)
-                                     }
-				 }
-                                 ip, err := net.LookupIP(c.String("host"))
-				 fmt.Println("ip :")
-                                 if err != nil {
-					 fmt.Println(err)
-                                 } else {
-                                     for i :=0; i < len(ip); i++ {
-                                         fmt.Println(ip[i])
-                                     }
-			         }
-                                 cname, err := net.LookupCNAME(c.String("host"))
-                                 fmt.Println("cname :")
-				 if err != nil {
-					 fmt.Println(err)
-				 } else {
-					 fmt.Println(cname)
-			         }
-                                 mx, err := net.LookupMX(c.String("host"))
-                                 fmt.Println("mx :")
-				 if err != nil {
-					 fmt.Println(err)
-                                 } else {
-                                     for i :=0; i < len(mx); i++ {
-                                         fmt.Println(mx[i].Host, mx[i].Pref)
-                                     }
-				 }
-                                 return nil
+			Flags: appFlags,
+			Action: func(c *cli.Context) error {
+				ns, err := net.LookupNS(c.String("host"))
+				fmt.Println("ns :")
+				if err != nil {
+					fmt.Println(err)
+				} else {
+					for i := 0; i < len(ns); i++ {
+						fmt.Println(ns[i].Host)
+					}
+				}
+				ip, err := net.LookupIP(c.String("host"))
+				fmt.Println("ip :")
+				if err != nil {
+					fmt.Println(err)
+				} else {
+					for i := 0; i < len(ip); i++ {
+						fmt.Println(ip[i])
+					}
+				}
+				cname, err := net.LookupCNAME(c.String("host"))
+				fmt.Println("cname :")
+				if err != nil {
+					fmt.Println(err)
+				} else {
+					fmt.Println(cname)
+				}
+				mx, err := net.LookupMX(c.String("host"))
+				fmt.Println("mx :")
+				if err != nil {
+					fmt.Println(err)
+				} else {
+					for i := 0; i < len(mx); i++ {
+						fmt.Println(mx[i].Host, mx[i].Pref)
+					}
+				}
+				return nil
 			},
 		},
 		{
