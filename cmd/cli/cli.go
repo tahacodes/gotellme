@@ -11,8 +11,8 @@ import (
 
 func main() {
 	app := cli.NewApp()
-	app.Name = "Simple website lookup tool"
-	app.Usage = "IP, CNAME, NameServers, MX records"
+	app.Name = "Simple hostname lookup tool"
+	app.Usage = "IP, CNAME, NS and MX records"
 	hostname := string(os.Args[2])
 	appFlags := []cli.Flag{
 		&cli.StringFlag{
